@@ -1,16 +1,16 @@
-import Constants from '../Utilities/Constants'
+import Constants from "../Utilities/Constants";
 import Table from "../Components/Table";
-import ButtonContainer from "../Components/ButtonContainer";
 import Loader from "../Components/Loader";
-import axios from 'axios'
+import axios from "axios";
 
 import { useState, useEffect } from "react";
-import CreateSongForm from '../Components/CreateSongForm';
+import CreateSongForm from "../Components/CreateSongForm";
+import UpdateSongForm from "../Components/UpdateSongForm";
 
 function Home() {
   const [loading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
-  const [showingCreateNewSongForm, setShowingCreateNewSongForm] = useState(false);
+  const [showAddNewSongModal, setShowAddNewSongModal] = useState(false);
 
   const url = Constants.API_URL_GET_ALL_SONGS;
 
@@ -23,19 +23,21 @@ function Home() {
         console.log(response.data);
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   function onSongCreated(createdSong) {
-    setShowingCreateNewSongForm(false);
     if (createdSong === null) {
-      return; 
+      return;
     }
-    alert('Post Has been added!')
+    alert("Post Has been added!");
     getSongs();
+    setShowAddNewSongModal(false);
   }
 
+
+
   useEffect(() => {
-    getSongs()
+    getSongs();
   }, []);
 
   return (
@@ -45,9 +47,27 @@ function Home() {
       ) : (
         <div className="home" id="home">
           <Table songs={songs} />
-          {/* <ButtonContainer /> */}
-          {showingCreateNewSongForm && <CreateSongForm onSongCreated={onSongCreated} />}
-          <button onClick={() => setShowingCreateNewSongForm(true)} className="btn btn-primary">Add New Song</button>
+          <CreateSongForm
+            onSongCreated={onSongCreated}
+            showAddNewSongModal={showAddNewSongModal}
+            setShowAddNewSongModal={setShowAddNewSongModal}
+          />
+          {/* <UpdateSongForm
+            onSongUpdated={onSongUpdated}
+            showUpdateSongModal={showUpdateSongModal}
+            setShowUpdateSongModal={setShowUpdateSongModal}
+          /> */}
+          <div className="side-nav w-half bg-secondary">
+            <label htmlFor="addSongModal" className="btn modal-button">
+              Add New Song
+            </label>
+            <input
+              onClick={() => setShowAddNewSongModal(true)}
+              type="checkbox"
+              id="addSongModal"
+              className="modal-toggle"
+            />
+          </div>
         </div>
       )}
     </>

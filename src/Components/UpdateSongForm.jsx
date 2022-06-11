@@ -1,11 +1,11 @@
 import { useState } from "react";
 import Constants from "../Utilities/Constants";
 
-function CreateSongForm(props) {
+function UpdateSongForm(props) {
   const initialFormData = Object.freeze({
-    title: "Song Title",
-    description: "Song Description",
-    videoUrl: "Video URL",
+    title: props.song.title,
+    description: props.song.description,
+    videoUrl: props.song.videoUrl,
   });
   const [formData, setFormData] = useState(initialFormData);
 
@@ -19,21 +19,21 @@ function CreateSongForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const songToCreate = {
-      songId: 0,
+    const songToUpdate = {
+      songId: props.song.songId,
       title: formData.title,
       description: formData.description,
       videoUrl: formData.videoUrl,
     };
 
-    const url = Constants.API_URL_CREATE_SONG;
+    const url = Constants.API_URL_UPDATE_SONG;
 
     fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(songToCreate),
+      body: JSON.stringify(songToUpdate),
     })
       .then((response) => response.json())
       .then((responseFromServer) => {
@@ -43,7 +43,7 @@ function CreateSongForm(props) {
         console.log(error);
         alert(error);
       });
-    props.onSongCreated(songToCreate);
+    props.onSongUpdated(songToUpdate);
   };
   return (
     <>
@@ -57,8 +57,8 @@ function CreateSongForm(props) {
             >
               ✕
             </label>
-            <form action="post" className="width-full px-8 pb-5">
-              <h1 className="mt-5 text-center">Add New Song</h1>
+            <form action="post" className="width-full px-8">
+              <h1 className="mt-5 text-center">Update Song with songId {props.song.songId}</h1>
               <div className="mt-5">
                 <label htmlFor="Song Title">
                   Song Title
@@ -113,4 +113,4 @@ function CreateSongForm(props) {
   );
 }
 
-export default CreateSongForm;
+export default UpdateSongForm;

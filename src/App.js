@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <Router>
-      <div className="h-screen">
+      <div className="">
         <Navbar />
         <main className="container mx-auto px-3 pb-12 pt-12">
           <Routes>
