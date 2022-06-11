@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+/* ================= General Stylings ================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Gentium Plus", serif;
+}
+
+/* ================= Header ================= */
+.nav-name {
+  font-size: 1.5rem;
+  font-weight: 900;
+  font-family: "Gentium Plus", serif;
+}
+.navBar .nav-item {
+  font-family: "Gentium Plus", serif;
+  font-size: 22px;
+}
+
+/* ================= Footer ================= */
+.my-name {
+  background-image: linear-gradient(to right, #ffffff, #ffffff 50%, #000 50%);
+  background-size: 200% 100%;
+  background-position: -100%;
+  display: inline-block;
+  padding: 5px 0;
+  position: relative;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.my-name:before {
+  content: "";
+  background: white;
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.my-name:hover {
+  background-position: 0;
+}
+
+.my-name:hover::before {
+  width: 100%;
+}
+
+.social-icon {
+  transition-duration: 0.5s;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+}
+
+/* ================= Home Page ================= */
+
+/* Table */
+.table th,
+.table td {
+  background: hsl(var(--p));
+  color: hsl(var(--pc));
+}
+
+.table th {
+  font-size: 16px;
+}
+
+table.table.w-full#table {
+  border-radius: 0 !important; 
+}
+
+td svg {
+    margin-left: 15px;
+}
+
+.button-container {
+  height: auto;
+  width: 100%;
+  padding: 20px;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* loader */
+
+#middle {
+  height: 60px;
+  width: 60px;
+  margin: auto;
+  position: relative;
+  top: 20px;
+  border-radius: 50%;
+  background-image: linear-gradient(
+      150deg,
+      transparent 50%,
+      rgb(130, 141, 248) 50%
+    ),
+    linear-gradient(90deg, rgb(130, 141, 248) 50%, white 50%);
+  -webkit-animation: rotation 1200ms infinite linear;
+  animation: rotation 1200ms infinite linear;
+  transform-origin: 50% 50%;
+  animation-timing-function: ease;
+}
+
+#inner {
+  background: #0e1729;
+  height: 48px;
+  width: 48px;
+  margin: auto;
+  position: relative;
+  top: 6px;
+  border-radius: 50%;
+}
+
+@-webkit-keyframes rotation {
+  from {
+    -webkit-transform: rotate(270deg);
+  }
+  to {
+    -webkit-transform: rotate(630deg);
+  }
+}
+@keyframes rotation {
+  from {
+    -webkit-transform: rotate(270deg);
+  }
+  to {
+    -webkit-transform: rotate(630deg);
+  }
+}
