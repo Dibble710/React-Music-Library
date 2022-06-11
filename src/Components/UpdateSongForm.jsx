@@ -47,18 +47,17 @@ function UpdateSongForm(props) {
   };
   return (
     <>
-      {props.showAddNewSongModal && (
         <div className="modal modal-open" id="formModal">
           <div className="modal-box relative">
             <label
-              onClick={() => props.setShowAddNewSongModal(false)}
+              onClick={() => props.setSong(null)}
               htmlFor="addSongModal"
               className="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕
             </label>
             <form action="post" className="width-full px-8">
-              <h1 className="mt-5 text-center">Update Song with songId {props.song.songId}</h1>
+              <h1 className="mt-5 text-center">Updating {props.song.title}</h1>
               <div className="mt-5">
                 <label htmlFor="Song Title">
                   Song Title
@@ -108,7 +107,6 @@ function UpdateSongForm(props) {
             </form>
           </div>
         </div>
-      )}
     </>
   );
 }

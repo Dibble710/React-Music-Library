@@ -12,18 +12,32 @@ function Home() {
   const [songs, setSongs] = useState([]);
   const [showAddNewSongModal, setShowAddNewSongModal] = useState(false);
 
-  const url = Constants.API_URL_GET_ALL_SONGS;
+  const [showUpdateSongModal, setShowUpdateSongModal] = useState(false);
+  const [songCurrentlyBeingUpdated, setSongCurrentlyBeingUpdated] = useState(null);
 
+
+  
   const getSongs = () => {
+    const url = Constants.API_URL_GET_ALL_SONGS;
     axios
       .get(url)
       .then((response) => {
         setSongs(response.data);
         setLoading(false);
-        console.log(response.data);
       })
       .catch((error) => console.log(error));
   };
+
+  function deleteSong(songId) {
+    const url = `${Constants.API_URL_DELETE_SONG_BY_ID}/${songId}`;
+    axios
+      .delete(url)
+      .then((response) => {
+        console.log(response.data);
+        getSongs()
+      })
+      .catch((error) => console.log(error));
+  }
 
   function onSongCreated(createdSong) {
     if (createdSong === null) {
@@ -32,6 +46,30 @@ function Home() {
     alert("Post Has been added!");
     getSongs();
     setShowAddNewSongModal(false);
+  }
+
+  function onSongUpdated(updatedSong) {
+    setSongCurrentlyBeingUpdated(null);
+
+    if (updatedSong === null) {
+      return;
+    }
+
+    let songsCopy = [...songs];
+
+    const index = songsCopy.findIndex((songsCopySong, currentIndex) => {
+      if (songsCopySong.songId === updatedSong.songId) {
+        return true
+      } else {
+        return false;
+      }
+    })
+
+    if (index !== -1) {
+      songsCopy[index] = updatedSong;
+    }
+    setSongs(songsCopy)
+    alert(`Song ${updatedSong.title} successfully updated`)
   }
 
 
@@ -46,17 +84,21 @@ function Home() {
         <Loader />
       ) : (
         <div className="home" id="home">
-          <Table songs={songs} />
+          <Table songs={songs} showUpdateSongModal={showUpdateSongModal} setSongCurrentlyBeingUpdated={setSongCurrentlyBeingUpdated} songCurrentlyBeingUpdated={songCurrentlyBeingUpdated} deleteSong={deleteSong} />
           <CreateSongForm
             onSongCreated={onSongCreated}
             showAddNewSongModal={showAddNewSongModal}
             setShowAddNewSongModal={setShowAddNewSongModal}
           />
-          {/* <UpdateSongForm
+          {songCurrentlyBeingUpdated !== null && (
+          <UpdateSongForm
+            song={songCurrentlyBeingUpdated}
+            setSong={setSongCurrentlyBeingUpdated}
             onSongUpdated={onSongUpdated}
             showUpdateSongModal={showUpdateSongModal}
             setShowUpdateSongModal={setShowUpdateSongModal}
-          /> */}
+          />
+          )}
           <div className="side-nav w-half bg-secondary">
             <label htmlFor="addSongModal" className="btn modal-button">
               Add New Song
