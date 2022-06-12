@@ -1,5 +1,5 @@
 import Constants from "../Utilities/Constants";
-import Table from "../Components/Table";
+import Table from "../Components/SongCard";
 import Loader from "../Components/Loader";
 import axios from "axios";
 
@@ -99,7 +99,7 @@ function Home() {
             setShowUpdateSongModal={setShowUpdateSongModal}
           />
           )}
-          <div className="side-nav w-half bg-secondary">
+          <div className="side-nav w-half">
             <label htmlFor="addSongModal" className="btn modal-button">
               Add New Song
             </label>

@@ -5,7 +5,7 @@ function CreateSongForm(props) {
   const initialFormData = Object.freeze({
     title: "Song Title",
     description: "Song Description",
-    videoUrl: "Video URL",
+    videoUrl: "https://www.youtube.com/embed/MXDF0wVcWfA",
   });
   const [formData, setFormData] = useState(initialFormData);
 
@@ -90,14 +90,14 @@ function CreateSongForm(props) {
 
               <div className="mt-5">
                 <label htmlFor="Song Video URL">
-                  YouTube URL
+                  YouTube Embed URL
                 </label>
                 <input
                   onChange={handleChange}
                   value={formData.videoUrl}
                   name="videoUrl"
                   type="text"
-                  placeholder="Song URL"
+                  placeholder="Youtube Embed URL"
                   className="input input-bordered input-primary w-full"
                 />
               </div>
