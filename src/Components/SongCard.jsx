@@ -1,23 +1,19 @@
-import axios from "axios";
-import Constants from "../Utilities/Constants";
-
-function Table({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
+function SongCard({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
   return (
     <>
-      <div className="grid grid-cols-3 gap-3 song-card-container">
+      <div className="grid song-card-container lg:grid-cols-3 lg:gap-3 md:gap-2">
         {songs.map((song) => (
           <div
-            className="card w-96 song-card bg-secondary shadow-xl mt-5"
+            className="card w-96 song-card glass mt-5"
             key={song.songId}
           >
             {song.videoUrl.includes("youtube.com/embed") ? (
               <iframe
                 width={400}
                 height={200}
-                src={`${song.videoUrl}`}
+                src={`${song.videoUrl}?showinfo=0&controls=0&autohide=1`}
                 title={song.title}
                 frameBorder={0}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             ) : (
@@ -41,9 +37,10 @@ function Table({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
                       window.confirm(
                         `Are you sure you would like to delete ${song.title}?`
                       )
-                    )
+                    ) {
                       deleteSong(song.songId);
                     alert(`${song.title} has been deleted!`);
+                    }
                   }}
                   className="btn btn-primary"
                 >
@@ -58,4 +55,4 @@ function Table({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
   );
 }
 
-export default Table;
+export default SongCard;

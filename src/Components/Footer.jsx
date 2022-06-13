@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="footer footer-center p-10 bg-primary text-primary-content">
+    <footer className="footer footer-center p-10 bg-neutral text-neutral-content">
       <div>
         <p className="font-bold">
           Designed and developed by <br />

@@ -26,10 +26,24 @@ form input {
 
 .navBar.bg-secondary {
   color: hsl(var(--sc));
+  padding: 10px;
 }
 
-.navBar.bg-primary {
-  color: hsl(var(--pc));
+.navBar.bg-neutral {
+  color: hsl(var(--nc));
+  padding: 0px;
+}
+
+.bg-neutral .nav-name {
+  font-size: 1.3rem;
+}
+
+.bg-neutral .nav-item {
+  font-size: 18px !important;
+}
+
+.bg-neutral .nav-item:hover {
+  color: hsl(var(--a));
 }
 
 .nav-name {
@@ -41,10 +55,9 @@ form input {
   font-family: "Gentium Plus", serif;
   font-size: 22px;
 }
-
 /* ================= Footer ================= */
 .my-name {
-  background-image: linear-gradient(to right, #ffffff, #ffffff 50%, #000 50%);
+  background-image: linear-gradient(to right, hsl(var(--a)), hsl(var(--a)) 50%, hsl(var(--nc)) 50%);
   background-size: 200% 100%;
   background-position: -100%;
   display: inline-block;
@@ -58,7 +71,7 @@ form input {
 
 .my-name:before {
   content: "";
-  background: white;
+  background: hsl(var(--a));
   display: block;
   position: absolute;
   bottom: -1px;
@@ -137,6 +150,24 @@ td svg:hover {
   text-align: center;
 }
 
+.song-card iframe {
+  min-width: 100%;
+}
+
+@media only screen and (max-width: 1317px) {
+  .song-card-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .song-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+}
 /* loader */
 
 #middle {

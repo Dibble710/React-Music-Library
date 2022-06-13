@@ -1,11 +1,5 @@
-import axios from 'axios'
-import Constants from "../Utilities/Constants";
-
-
 function Table({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
-
   return (
-
     <>
       <div className="overflow-x-auto flex table-container">
         <table id="table" className="table">
@@ -32,12 +26,27 @@ function Table({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
                   </a>
                 </td>
                 <td>
-                  <button onClick={() => {
-                    if(window.confirm(`Are you sure you would like to delete ${song.title}?`)) deleteSong(song.songId)
-                  }} className="btn btn-primary">Delete</button>
+                  <button
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          `Are you sure you would like to delete ${song.title}?`
+                        )
+                      )
+                        deleteSong(song.songId);
+                    }}
+                    className="btn btn-primary"
+                  >
+                    Delete
+                  </button>
                 </td>
                 <td>
-                  <button onClick={() => setSongCurrentlyBeingUpdated(song)} className="btn btn-primary">Update</button>
+                  <button
+                    onClick={() => setSongCurrentlyBeingUpdated(song)}
+                    className="btn btn-primary"
+                  >
+                    Update
+                  </button>
                 </td>
               </tr>
             ))}

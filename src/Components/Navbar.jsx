@@ -1,17 +1,16 @@
 import { NavLink } from "react-router-dom";
-
 import { Transition } from "@headlessui/react";
-
 import { useState, useEffect } from "react";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Check scroll poition to add styles on scroll
   const handleScroll = () => {
     const position = Math.round(window.pageYOffset);
     setScrollPosition(position);
   };
-
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -20,46 +19,43 @@ function Navbar() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  // if(window.scrollY >= 80){
-    // "bg-primary navBar sticky top-0"
   return (
     <>
-      <nav className={`${scrollPosition >= 80 ? 'bg-secondary' : 'bg-primary'} navBar sticky top-0`}>
+      <nav className={`${scrollPosition >= 80 ? 'bg-neutral' : ''} navBar sticky top-0`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
                 <NavLink to="/">
-                  <div className="nav-name">Music App</div>
+                  <div className="hover:text-accent nav-name">Music App</div>
                 </NavLink>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <NavLink
                     to="/"
-                    className="px-3 py-2 rounded-md text-sm nav-item"
+                    className="hover:text-accent px-3 py-2 rounded-md text-sm nav-item"
                   >
                     Home
                   </NavLink>
 
                   <NavLink
                     to="/projects"
-                    className="px-3 py-2 rounded-md text-sm nav-item"
+                    className="hover:text-accent px-3 py-2 rounded-md text-sm nav-item"
                   >
                     Projects
                   </NavLink>
 
                   <NavLink
                     to="/about"
-                    className="px-3 py-2 rounded-md text-sm nav-item"
+                    className="hover:text-accent px-3 py-2 rounded-md text-sm nav-item"
                   >
                     About
                   </NavLink>
 
                   <NavLink
                     to="/contact"
-                    className="px-3 py-2 rounded-md text-sm nav-item"
+                    className="hover:text-accent px-3 py-2 rounded-md text-sm nav-item"
                   >
                     Contact
                   </NavLink>

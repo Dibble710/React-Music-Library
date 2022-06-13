@@ -13,10 +13,43 @@ function Home() {
   const [showAddNewSongModal, setShowAddNewSongModal] = useState(false);
 
   const [showUpdateSongModal, setShowUpdateSongModal] = useState(false);
-  const [songCurrentlyBeingUpdated, setSongCurrentlyBeingUpdated] = useState(null);
+  const [songCurrentlyBeingUpdated, setSongCurrentlyBeingUpdated] =
+    useState(null);
 
+  const html = document.querySelector("html");
 
-  
+  const themes = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+  ];
+
   const getSongs = () => {
     const url = Constants.API_URL_GET_ALL_SONGS;
     axios
@@ -34,7 +67,7 @@ function Home() {
       .delete(url)
       .then((response) => {
         console.log(response.data);
-        getSongs()
+        getSongs();
       })
       .catch((error) => console.log(error));
   }
@@ -59,20 +92,18 @@ function Home() {
 
     const index = songsCopy.findIndex((songsCopySong, currentIndex) => {
       if (songsCopySong.songId === updatedSong.songId) {
-        return true
+        return true;
       } else {
         return false;
       }
-    })
+    });
 
     if (index !== -1) {
       songsCopy[index] = updatedSong;
     }
-    setSongs(songsCopy)
-    alert(`Song ${updatedSong.title} successfully updated`)
+    setSongs(songsCopy);
+    alert(`Song ${updatedSong.title} successfully updated`);
   }
-
-
 
   useEffect(() => {
     getSongs();
@@ -84,23 +115,32 @@ function Home() {
         <Loader />
       ) : (
         <div className="home" id="home">
-          <Table songs={songs} showUpdateSongModal={showUpdateSongModal} setSongCurrentlyBeingUpdated={setSongCurrentlyBeingUpdated} songCurrentlyBeingUpdated={songCurrentlyBeingUpdated} deleteSong={deleteSong} />
+          <Table
+            songs={songs}
+            showUpdateSongModal={showUpdateSongModal}
+            setSongCurrentlyBeingUpdated={setSongCurrentlyBeingUpdated}
+            songCurrentlyBeingUpdated={songCurrentlyBeingUpdated}
+            deleteSong={deleteSong}
+          />
           <CreateSongForm
             onSongCreated={onSongCreated}
             showAddNewSongModal={showAddNewSongModal}
             setShowAddNewSongModal={setShowAddNewSongModal}
           />
           {songCurrentlyBeingUpdated !== null && (
-          <UpdateSongForm
-            song={songCurrentlyBeingUpdated}
-            setSong={setSongCurrentlyBeingUpdated}
-            onSongUpdated={onSongUpdated}
-            showUpdateSongModal={showUpdateSongModal}
-            setShowUpdateSongModal={setShowUpdateSongModal}
-          />
+            <UpdateSongForm
+              song={songCurrentlyBeingUpdated}
+              setSong={setSongCurrentlyBeingUpdated}
+              onSongUpdated={onSongUpdated}
+              showUpdateSongModal={showUpdateSongModal}
+              setShowUpdateSongModal={setShowUpdateSongModal}
+            />
           )}
           <div className="side-nav w-half">
-            <label htmlFor="addSongModal" className="btn modal-button">
+            <label
+              htmlFor="addSongModal"
+              className="btn btn-primary modal-button"
+            >
               Add New Song
             </label>
             <input
@@ -109,6 +149,18 @@ function Home() {
               id="addSongModal"
               className="modal-toggle"
             />
+            <button
+              onClick={() => {
+                html.setAttribute(
+                  "data-theme",
+                  themes[Math.floor(Math.random() * themes.length)]
+                );
+              }}
+              className="btn btn-secondary ml-5"
+            >
+              New Theme!
+            </button>
+            <div className="theme text-center ml-5">Theme Name: <br /> {html.getAttribute('data-theme')}</div>
           </div>
         </div>
       )}
