@@ -10,11 +10,27 @@ import UpdateSongForm from "../Components/UpdateSongForm";
 function Home() {
   const [loading, setLoading] = useState(true);
   const [songs, setSongs] = useState([]);
+  const [currentTheme, setCurrentTheme] = useState("business");
   const [showAddNewSongModal, setShowAddNewSongModal] = useState(false);
 
   const [showUpdateSongModal, setShowUpdateSongModal] = useState(false);
   const [songCurrentlyBeingUpdated, setSongCurrentlyBeingUpdated] =
     useState(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Check scroll poition to add styles on scroll
+  const handleScroll = () => {
+    const position = Math.round(window.pageYOffset);
+    setScrollPosition(position);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const html = document.querySelector("html");
 
@@ -155,12 +171,15 @@ function Home() {
                   "data-theme",
                   themes[Math.floor(Math.random() * themes.length)]
                 );
+                setCurrentTheme(html.getAttribute("data-theme"));
               }}
               className="btn btn-secondary ml-5"
             >
-              New Theme!
+              Change Theme!
             </button>
-            <div className="theme text-center ml-5">Theme Name: <br /> {html.getAttribute('data-theme')}</div>
+            <div className={`${scrollPosition >= 80 ? 'text-white' : 'text-base-content'} text-center ml-5`}>
+              Theme Name: <br /> {currentTheme}
+            </div>
           </div>
         </div>
       )}

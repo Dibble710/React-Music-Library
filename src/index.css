@@ -57,7 +57,7 @@ form input {
 }
 /* ================= Footer ================= */
 .my-name {
-  background-image: linear-gradient(to right, hsl(var(--a)), hsl(var(--a)) 50%, hsl(var(--nc)) 50%);
+  background-image: linear-gradient(to right, hsl(var(--bc)), hsl(var(--bc)) 50%, hsl(var(--nc)) 50%);
   background-size: 200% 100%;
   background-position: -100%;
   display: inline-block;
@@ -71,7 +71,7 @@ form input {
 
 .my-name:before {
   content: "";
-  background: hsl(var(--a));
+  background: hsl(var(--bc));
   display: block;
   position: absolute;
   bottom: -1px;

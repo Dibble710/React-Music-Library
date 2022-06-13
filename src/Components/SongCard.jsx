@@ -4,7 +4,7 @@ function SongCard({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
       <div className="grid song-card-container lg:grid-cols-3 lg:gap-3 md:gap-2">
         {songs.map((song) => (
           <div
-            className="card w-96 song-card glass mt-5"
+            className="card w-96 song-card bg-primary text-primary-content mt-5"
             key={song.songId}
           >
             {song.videoUrl.includes("youtube.com/embed") ? (
@@ -27,7 +27,7 @@ function SongCard({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
               <div className="card-actions justify-start">
                 <button
                   onClick={() => setSongCurrentlyBeingUpdated(song)}
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                 >
                   Edit Song
                 </button>
@@ -42,7 +42,7 @@ function SongCard({ songs, setSongCurrentlyBeingUpdated, deleteSong }) {
                     alert(`${song.title} has been deleted!`);
                     }
                   }}
-                  className="btn btn-primary"
+                  className="btn btn-secondary"
                 >
                   Delete Song
                 </button>

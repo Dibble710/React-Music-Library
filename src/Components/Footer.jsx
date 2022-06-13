@@ -5,16 +5,27 @@ function Footer() {
     <footer className="footer footer-center p-10 bg-neutral text-neutral-content">
       <div>
         <p className="font-bold">
-          Designed and developed by <br />
+          Designed and developed by {" "}
           <a
             href="https://www.tylerantoni.com"
             target="_blank"
             rel="noreferrer"
             className="my-name"
           >
-            Tyler Antoni
+             Tyler Antoni
+          </a>
+          <br />
+          Themes provided by {" "}
+          <a
+            href="https://daisyui.com/"
+            target="_blank"
+            rel="noreferrer"
+            className="my-name"
+          >
+             DaisyUI
           </a>
         </p>
+
         <p>Copyright © 2022 - All right reserved</p>
       </div>
       <div>
