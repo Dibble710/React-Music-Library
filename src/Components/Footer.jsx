@@ -31,7 +31,7 @@ function Footer() {
       <div>
         <div className="grid grid-flow-col gap-4">
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/tyler-antoni-48024290/"
             target="_blank"
             rel="noreferrer"
             className="social-icon"
@@ -47,7 +47,7 @@ function Footer() {
             </svg>
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/Dibble710"
             target="_blank"
             rel="noreferrer"
             className="social-icon"
@@ -63,7 +63,7 @@ function Footer() {
             </svg>
           </a>
           <a
-            href="https://www.facebook.com"
+            href="https://www.facebook.com/tyler.antoni"
             target="_blank"
             rel="noreferrer"
             className="social-icon"
