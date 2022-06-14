@@ -1,11 +1,10 @@
 import { useState } from "react";
-import Constants from "../Utilities/Constants";
 
 function CreateSongForm(props) {
   const initialFormData = Object.freeze({
     title: "Song Title",
     description: "Song Description",
-    videoUrl: "https://www.youtube.com/embed/MXDF0wVcWfA",
+    videoUrl: "https://www.youtube.com/embed/SigIbCVMTzU",
   });
   const [formData, setFormData] = useState(initialFormData);
 
@@ -26,7 +25,7 @@ function CreateSongForm(props) {
       videoUrl: formData.videoUrl,
     };
 
-    const url = Constants.API_URL_CREATE_SONG;
+    const url = "https://aspnetcoremusicapi.azurewebsites.net/create-song";
 
     fetch(url, {
       method: "POST",
@@ -60,9 +59,7 @@ function CreateSongForm(props) {
             <form action="post" className="width-full px-8 pb-5">
               <h1 className="mt-5 text-center">Add New Song</h1>
               <div className="mt-5">
-                <label htmlFor="Song Title">
-                  Song Title
-                </label>
+                <label htmlFor="Song Title">Song Title</label>
                 <input
                   required
                   onChange={handleChange}
@@ -75,9 +72,7 @@ function CreateSongForm(props) {
               </div>
 
               <div className="mt-5">
-                <label htmlFor="Song Description">
-                  Song Description
-                </label>
+                <label htmlFor="Song Description">Song Description</label>
                 <input
                   onChange={handleChange}
                   value={formData.description}
@@ -89,9 +84,7 @@ function CreateSongForm(props) {
               </div>
 
               <div className="mt-5">
-                <label htmlFor="Song Video URL">
-                  YouTube Embed URL
-                </label>
+                <label htmlFor="Song Video URL">YouTube Embed URL</label>
                 <input
                   onChange={handleChange}
                   value={formData.videoUrl}
@@ -102,7 +95,11 @@ function CreateSongForm(props) {
                 />
               </div>
 
-              <button type="submit" onClick={handleSubmit} className="btn btn-block btn-primary mt-5">
+              <button
+                type="submit"
+                onClick={handleSubmit}
+                className="btn btn-block btn-primary mt-5"
+              >
                 Submit
               </button>
             </form>

@@ -1,4 +1,3 @@
-import Constants from "../Utilities/Constants";
 import Table from "../Components/SongCard";
 import Loader from "../Components/Loader";
 import axios from "axios";
@@ -67,7 +66,7 @@ function Home() {
   ];
 
   const getSongs = () => {
-    const url = Constants.API_URL_GET_ALL_SONGS;
+    const url = "https://aspnetcoremusicapi.azurewebsites.net/get-all-songs";
     axios
       .get(url)
       .then((response) => {
@@ -78,11 +77,10 @@ function Home() {
   };
 
   function deleteSong(songId) {
-    const url = `${Constants.API_URL_DELETE_SONG_BY_ID}/${songId}`;
+    const url = `https://aspnetcoremusicapi.azurewebsites.net/delete-song-by-id/${songId}`;
     axios
       .delete(url)
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
         getSongs();
       })
       .catch((error) => console.log(error));
@@ -92,7 +90,7 @@ function Home() {
     if (createdSong === null) {
       return;
     }
-    alert("Post Has been added!");
+    alert("Song has been added!");
     getSongs();
     setShowAddNewSongModal(false);
   }
@@ -108,6 +106,7 @@ function Home() {
 
     const index = songsCopy.findIndex((songsCopySong, currentIndex) => {
       if (songsCopySong.songId === updatedSong.songId) {
+        alert(`Song ${updatedSong.title} successfully updated`);
         return true;
       } else {
         return false;
@@ -118,7 +117,6 @@ function Home() {
       songsCopy[index] = updatedSong;
     }
     setSongs(songsCopy);
-    alert(`Song ${updatedSong.title} successfully updated`);
   }
 
   useEffect(() => {
@@ -131,27 +129,6 @@ function Home() {
         <Loader />
       ) : (
         <div className="home" id="home">
-          <Table
-            songs={songs}
-            showUpdateSongModal={showUpdateSongModal}
-            setSongCurrentlyBeingUpdated={setSongCurrentlyBeingUpdated}
-            songCurrentlyBeingUpdated={songCurrentlyBeingUpdated}
-            deleteSong={deleteSong}
-          />
-          <CreateSongForm
-            onSongCreated={onSongCreated}
-            showAddNewSongModal={showAddNewSongModal}
-            setShowAddNewSongModal={setShowAddNewSongModal}
-          />
-          {songCurrentlyBeingUpdated !== null && (
-            <UpdateSongForm
-              song={songCurrentlyBeingUpdated}
-              setSong={setSongCurrentlyBeingUpdated}
-              onSongUpdated={onSongUpdated}
-              showUpdateSongModal={showUpdateSongModal}
-              setShowUpdateSongModal={setShowUpdateSongModal}
-            />
-          )}
           <div className="side-nav w-half">
             <label
               htmlFor="addSongModal"
@@ -177,10 +154,35 @@ function Home() {
             >
               Change Theme!
             </button>
-            <div className={`${scrollPosition >= 80 ? 'text-white' : 'text-base-content'} text-center ml-5`}>
+            <div
+              className={`${
+                scrollPosition >= 80 ? "text-white" : "text-base-content"
+              } text-center ml-5`}
+            >
               Theme Name: <br /> {currentTheme}
             </div>
           </div>
+          <Table
+            songs={songs}
+            showUpdateSongModal={showUpdateSongModal}
+            setSongCurrentlyBeingUpdated={setSongCurrentlyBeingUpdated}
+            songCurrentlyBeingUpdated={songCurrentlyBeingUpdated}
+            deleteSong={deleteSong}
+          />
+          <CreateSongForm
+            onSongCreated={onSongCreated}
+            showAddNewSongModal={showAddNewSongModal}
+            setShowAddNewSongModal={setShowAddNewSongModal}
+          />
+          {songCurrentlyBeingUpdated !== null && (
+            <UpdateSongForm
+              song={songCurrentlyBeingUpdated}
+              setSong={setSongCurrentlyBeingUpdated}
+              onSongUpdated={onSongUpdated}
+              showUpdateSongModal={showUpdateSongModal}
+              setShowUpdateSongModal={setShowUpdateSongModal}
+            />
+          )}
         </div>
       )}
     </>

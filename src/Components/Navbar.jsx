@@ -21,7 +21,7 @@ function Navbar() {
   }, []);
   return (
     <>
-      <nav className={`${scrollPosition >= 80 ? 'bg-neutral' : ''} navBar sticky top-0`}>
+      <nav className={`${scrollPosition >= 30 ? 'bg-neutral' : ''} navBar sticky top-0`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">

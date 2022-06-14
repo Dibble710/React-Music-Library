@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
         <Navbar />
-        <main className="container mx-auto px-3 pb-12 pt-12">
+        <main className="container mx-auto px-3 pb-4 pt-4">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />

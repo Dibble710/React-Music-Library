@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Constants from "../Utilities/Constants";
 
 function UpdateSongForm(props) {
   const initialFormData = Object.freeze({
@@ -26,7 +25,7 @@ function UpdateSongForm(props) {
       videoUrl: formData.videoUrl,
     };
 
-    const url = Constants.API_URL_UPDATE_SONG;
+    const url = "https://aspnetcoremusicapi.azurewebsites.net/update-song";
 
     fetch(url, {
       method: "PUT",
@@ -47,66 +46,64 @@ function UpdateSongForm(props) {
   };
   return (
     <>
-        <div className="modal modal-open" id="formModal">
-          <div className="modal-box relative">
-            <label
-              onClick={() => props.setSong(null)}
-              htmlFor="addSongModal"
-              className="btn btn-sm btn-circle absolute right-2 top-2"
+      <div className="modal modal-open" id="formModal">
+        <div className="modal-box relative">
+          <label
+            onClick={() => props.setSong(null)}
+            htmlFor="addSongModal"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <form action="post" className="width-full px-8">
+            <h1 className="mt-5 text-center">Updating {props.song.title}</h1>
+            <div className="mt-5">
+              <label htmlFor="Song Title">Song Title</label>
+              <input
+                required
+                onChange={handleChange}
+                value={formData.title}
+                name="title"
+                type="text"
+                placeholder="Song Title"
+                className="input input-bordered input-primary w-full"
+              />
+            </div>
+
+            <div className="mt-5">
+              <label htmlFor="Song Description">Song Description</label>
+              <input
+                onChange={handleChange}
+                value={formData.description}
+                name="description"
+                type="text"
+                placeholder="Song Description"
+                className="input input-bordered input-primary w-full"
+              />
+            </div>
+
+            <div className="mt-5">
+              <label htmlFor="Song Video URL">YouTube URL</label>
+              <input
+                onChange={handleChange}
+                value={formData.videoUrl}
+                name="videoUrl"
+                type="text"
+                placeholder="Song URL"
+                className="input input-bordered input-primary w-full"
+              />
+            </div>
+
+            <button
+              type="submit"
+              onClick={handleSubmit}
+              className="btn btn-block btn-primary mt-5"
             >
-              ✕
-            </label>
-            <form action="post" className="width-full px-8">
-              <h1 className="mt-5 text-center">Updating {props.song.title}</h1>
-              <div className="mt-5">
-                <label htmlFor="Song Title">
-                  Song Title
-                </label>
-                <input
-                  required
-                  onChange={handleChange}
-                  value={formData.title}
-                  name="title"
-                  type="text"
-                  placeholder="Song Title"
-                  className="input input-bordered input-primary w-full"
-                />
-              </div>
-
-              <div className="mt-5">
-                <label htmlFor="Song Description">
-                  Song Description
-                </label>
-                <input
-                  onChange={handleChange}
-                  value={formData.description}
-                  name="description"
-                  type="text"
-                  placeholder="Song Description"
-                  className="input input-bordered input-primary w-full"
-                />
-              </div>
-
-              <div className="mt-5">
-                <label htmlFor="Song Video URL">
-                  YouTube URL
-                </label>
-                <input
-                  onChange={handleChange}
-                  value={formData.videoUrl}
-                  name="videoUrl"
-                  type="text"
-                  placeholder="Song URL"
-                  className="input input-bordered input-primary w-full"
-                />
-              </div>
-
-              <button type="submit" onClick={handleSubmit} className="btn btn-block btn-primary mt-5">
-                Submit
-              </button>
-            </form>
-          </div>
+              Submit
+            </button>
+          </form>
         </div>
+      </div>
     </>
   );
 }
